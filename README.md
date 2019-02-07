@@ -2,7 +2,7 @@
 Projekt wypożyczalni wideo
 
 <br><strong>W jakiej technologi tworzymy?:</strong>
-<br>aplikacja okienkowa C#
+<br>aplikacja okienkowa C# , LINQ
 
 <br><strong>Struktura commita:</strong>
 <br>#opis_co_zrobiłeś
