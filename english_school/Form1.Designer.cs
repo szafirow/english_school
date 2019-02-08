@@ -1,4 +1,4 @@
-﻿namespace rental_application
+﻿namespace english_school
 {
     partial class Form1
     {

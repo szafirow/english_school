@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace rental_application.Properties
+namespace english_school.Properties
 {
 
 
