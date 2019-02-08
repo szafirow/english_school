@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DB" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\DB.mdf;Integrated Security=True" SettingsObjectName="english_school.Properties.Settings" SettingsPropertyName="DBConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Class" Member="Class">
+    <Type Name="Class">
+      <Column Name="class_id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="class_number" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Teacher" Member="Teacher">
+    <Type Name="Teacher">
+      <Column Name="teacher_id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="teacher_name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="teacher_phone" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="course_id" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="language_id" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="Course_Teacher" Member="Course" ThisKey="course_id" OtherKey="course_id" Type="Course" IsForeignKey="true" />
+      <Association Name="Language_Teacher" Member="Language" ThisKey="language_id" OtherKey="language_id" Type="Language" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Contract" Member="Contract">
+    <Type Name="Contract">
+      <Column Name="contract_id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="contract_number" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="contract_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Association Name="Contract_Student" Member="Student" ThisKey="contract_id" OtherKey="contract_id" Type="Student" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Course" Member="Course">
+    <Type Name="Course">
+      <Column Name="course_id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="course_duration" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="course_cost" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="name_course_id" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="level_id" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="Course_Teacher" Member="Teacher" ThisKey="course_id" OtherKey="course_id" Type="Teacher" />
+      <Association Name="Course_Student" Member="Student" ThisKey="course_id" OtherKey="course_id" Type="Student" />
+      <Association Name="Level_Course" Member="Level" ThisKey="level_id" OtherKey="level_id" Type="Level" IsForeignKey="true" />
+      <Association Name="Name_course_Course" Member="Name_course" ThisKey="name_course_id" OtherKey="name_course_id" Type="Name_course" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Groupe" Member="Groupe">
+    <Type Name="Groupe">
+      <Column Name="group_id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="group_start" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="group_finish" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="course_id" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="teacher_id" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="kind_education_id" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="status_id" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="Groupe_Student" Member="Student" ThisKey="group_id" OtherKey="group_id" Type="Student" />
+      <Association Name="Kind_education_Groupe" Member="Kind_education" ThisKey="kind_education_id" OtherKey="kind_education_id" Type="Kind_education" IsForeignKey="true" />
+      <Association Name="Status_Groupe" Member="Status" ThisKey="status_id" OtherKey="status_id" Type="Status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Kind_education" Member="Kind_education">
+    <Type Name="Kind_education">
+      <Column Name="kind_education_id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="kind_education_name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="Kind_education_Groupe" Member="Groupe" ThisKey="kind_education_id" OtherKey="kind_education_id" Type="Groupe" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Language" Member="Language">
+    <Type Name="Language">
+      <Column Name="language_id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="language_name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="Language_Teacher" Member="Teacher" ThisKey="language_id" OtherKey="language_id" Type="Teacher" />
+      <Association Name="Language_Student" Member="Student" ThisKey="language_id" OtherKey="language_id" Type="Student" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Level]" Member="Level">
+    <Type Name="Level">
+      <Column Name="level_id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="level_name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="Level_Course" Member="Course" ThisKey="level_id" OtherKey="level_id" Type="Course" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Name_course" Member="Name_course">
+    <Type Name="Name_course">
+      <Column Name="name_course_id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="name_course_name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="Name_course_Course" Member="Course" ThisKey="name_course_id" OtherKey="name_course_id" Type="Course" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Schedule" Member="Schedule">
+    <Type Name="Schedule">
+      <Column Name="schedule_id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="schedule_date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="group_id" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Status" Member="Status">
+    <Type Name="Status">
+      <Column Name="status_id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="status_name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Association Name="Status_Groupe" Member="Groupe" ThisKey="status_id" OtherKey="status_id" Type="Groupe" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Student" Member="Student">
+    <Type Name="Student">
+      <Column Name="student_id" Type="System.Decimal" DbType="Decimal(18,0) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="student_name" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="student_birthday" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="student_adress" Type="System.String" DbType="VarChar(40)" CanBeNull="true" />
+      <Column Name="student_phone" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="student_passport" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="course_id" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="contract_id" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="group_id" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="level_id" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Column Name="language_id" Type="System.Decimal" DbType="Decimal(18,0)" CanBeNull="true" />
+      <Association Name="Course_Student" Member="Course" ThisKey="course_id" OtherKey="course_id" Type="Course" IsForeignKey="true" />
+      <Association Name="Contract_Student" Member="Contract" ThisKey="contract_id" OtherKey="contract_id" Type="Contract" IsForeignKey="true" />
+      <Association Name="Groupe_Student" Member="Groupe" ThisKey="group_id" OtherKey="group_id" Type="Groupe" IsForeignKey="true" />
+      <Association Name="Language_Student" Member="Language" ThisKey="language_id" OtherKey="language_id" Type="Language" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
